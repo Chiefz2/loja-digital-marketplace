@@ -23,6 +23,10 @@ import { Route as LojaIdRouteImport } from './routes/loja.$id'
 import { Route as PedidoConfirmadoIdRouteImport } from './routes/pedido-confirmado.$id'
 import { Route as ProdutoIdRouteImport } from './routes/produto.$id'
 import { Route as ContaPedidosIndexRouteImport } from './routes/conta.pedidos.index'
+import { Route as ContaPedidosIdRouteImport } from './routes/conta.pedidos.$id'
+import { Route as ContaReembolsosIndexRouteImport } from './routes/conta.reembolsos.index'
+import { Route as ContaReembolsosIdRouteImport } from './routes/conta.reembolsos.$id'
+import { Route as ContaReembolsosNovoPedidoIdRouteImport } from './routes/conta.reembolsos.novo.$pedidoId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -94,6 +98,27 @@ const ContaPedidosIndexRoute = ContaPedidosIndexRouteImport.update({
   path: '/conta/pedidos/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContaPedidosIdRoute = ContaPedidosIdRouteImport.update({
+  id: '/conta/pedidos/$id',
+  path: '/conta/pedidos/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContaReembolsosIndexRoute = ContaReembolsosIndexRouteImport.update({
+  id: '/conta/reembolsos/',
+  path: '/conta/reembolsos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContaReembolsosIdRoute = ContaReembolsosIdRouteImport.update({
+  id: '/conta/reembolsos/$id',
+  path: '/conta/reembolsos/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContaReembolsosNovoPedidoIdRoute =
+  ContaReembolsosNovoPedidoIdRouteImport.update({
+    id: '/conta/reembolsos/novo/$pedidoId',
+    path: '/conta/reembolsos/novo/$pedidoId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -109,7 +134,11 @@ export interface FileRoutesByFullPath {
   '/pedido-confirmado/$id': typeof PedidoConfirmadoIdRoute
   '/produto/$id': typeof ProdutoIdRoute
   '/conta/': typeof ContaIndexRoute
+  '/conta/pedidos/$id': typeof ContaPedidosIdRoute
+  '/conta/reembolsos/$id': typeof ContaReembolsosIdRoute
   '/conta/pedidos/': typeof ContaPedidosIndexRoute
+  '/conta/reembolsos/': typeof ContaReembolsosIndexRoute
+  '/conta/reembolsos/novo/$pedidoId': typeof ContaReembolsosNovoPedidoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -125,7 +154,11 @@ export interface FileRoutesByTo {
   '/pedido-confirmado/$id': typeof PedidoConfirmadoIdRoute
   '/produto/$id': typeof ProdutoIdRoute
   '/conta': typeof ContaIndexRoute
+  '/conta/pedidos/$id': typeof ContaPedidosIdRoute
+  '/conta/reembolsos/$id': typeof ContaReembolsosIdRoute
   '/conta/pedidos': typeof ContaPedidosIndexRoute
+  '/conta/reembolsos': typeof ContaReembolsosIndexRoute
+  '/conta/reembolsos/novo/$pedidoId': typeof ContaReembolsosNovoPedidoIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -142,7 +175,11 @@ export interface FileRoutesById {
   '/pedido-confirmado/$id': typeof PedidoConfirmadoIdRoute
   '/produto/$id': typeof ProdutoIdRoute
   '/conta/': typeof ContaIndexRoute
+  '/conta/pedidos/$id': typeof ContaPedidosIdRoute
+  '/conta/reembolsos/$id': typeof ContaReembolsosIdRoute
   '/conta/pedidos/': typeof ContaPedidosIndexRoute
+  '/conta/reembolsos/': typeof ContaReembolsosIndexRoute
+  '/conta/reembolsos/novo/$pedidoId': typeof ContaReembolsosNovoPedidoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -160,7 +197,11 @@ export interface FileRouteTypes {
     | '/pedido-confirmado/$id'
     | '/produto/$id'
     | '/conta/'
+    | '/conta/pedidos/$id'
+    | '/conta/reembolsos/$id'
     | '/conta/pedidos/'
+    | '/conta/reembolsos/'
+    | '/conta/reembolsos/novo/$pedidoId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -176,7 +217,11 @@ export interface FileRouteTypes {
     | '/pedido-confirmado/$id'
     | '/produto/$id'
     | '/conta'
+    | '/conta/pedidos/$id'
+    | '/conta/reembolsos/$id'
     | '/conta/pedidos'
+    | '/conta/reembolsos'
+    | '/conta/reembolsos/novo/$pedidoId'
   id:
     | '__root__'
     | '/'
@@ -192,7 +237,11 @@ export interface FileRouteTypes {
     | '/pedido-confirmado/$id'
     | '/produto/$id'
     | '/conta/'
+    | '/conta/pedidos/$id'
+    | '/conta/reembolsos/$id'
     | '/conta/pedidos/'
+    | '/conta/reembolsos/'
+    | '/conta/reembolsos/novo/$pedidoId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -209,7 +258,11 @@ export interface RootRouteChildren {
   PedidoConfirmadoIdRoute: typeof PedidoConfirmadoIdRoute
   ProdutoIdRoute: typeof ProdutoIdRoute
   ContaIndexRoute: typeof ContaIndexRoute
+  ContaPedidosIdRoute: typeof ContaPedidosIdRoute
+  ContaReembolsosIdRoute: typeof ContaReembolsosIdRoute
   ContaPedidosIndexRoute: typeof ContaPedidosIndexRoute
+  ContaReembolsosIndexRoute: typeof ContaReembolsosIndexRoute
+  ContaReembolsosNovoPedidoIdRoute: typeof ContaReembolsosNovoPedidoIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -312,6 +365,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContaPedidosIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/conta/pedidos/$id': {
+      id: '/conta/pedidos/$id'
+      path: '/conta/pedidos/$id'
+      fullPath: '/conta/pedidos/$id'
+      preLoaderRoute: typeof ContaPedidosIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conta/reembolsos/': {
+      id: '/conta/reembolsos/'
+      path: '/conta/reembolsos'
+      fullPath: '/conta/reembolsos/'
+      preLoaderRoute: typeof ContaReembolsosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conta/reembolsos/$id': {
+      id: '/conta/reembolsos/$id'
+      path: '/conta/reembolsos/$id'
+      fullPath: '/conta/reembolsos/$id'
+      preLoaderRoute: typeof ContaReembolsosIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conta/reembolsos/novo/$pedidoId': {
+      id: '/conta/reembolsos/novo/$pedidoId'
+      path: '/conta/reembolsos/novo/$pedidoId'
+      fullPath: '/conta/reembolsos/novo/$pedidoId'
+      preLoaderRoute: typeof ContaReembolsosNovoPedidoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -329,7 +410,11 @@ const rootRouteChildren: RootRouteChildren = {
   PedidoConfirmadoIdRoute: PedidoConfirmadoIdRoute,
   ProdutoIdRoute: ProdutoIdRoute,
   ContaIndexRoute: ContaIndexRoute,
+  ContaPedidosIdRoute: ContaPedidosIdRoute,
+  ContaReembolsosIdRoute: ContaReembolsosIdRoute,
   ContaPedidosIndexRoute: ContaPedidosIndexRoute,
+  ContaReembolsosIndexRoute: ContaReembolsosIndexRoute,
+  ContaReembolsosNovoPedidoIdRoute: ContaReembolsosNovoPedidoIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
