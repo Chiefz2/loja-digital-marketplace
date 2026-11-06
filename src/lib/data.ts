@@ -91,7 +91,7 @@ export type Produto = {
   descricao: string;
   specs: [string, string][];
   preco: number;
-  precoOriginal?: number;
+  precoOriginal?: number | undefined;
   estoque: number;
   condicao: "novo" | "usado";
   freteGratis: boolean;

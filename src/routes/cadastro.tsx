@@ -32,7 +32,7 @@ function Cadastro() {
   const [f, setF] = useState(empty);
   const [foto, setFoto] = useState<string>();
   const [termos, setTermos] = useState(false);
-  const [err, setErr] = useState<Partial<Record<keyof typeof empty | "termos" | "foto", string>>>({});
+  const [err, setErr] = useState<Partial<Record<keyof typeof empty | "termos" | "foto", string | undefined>>>({});
   const [loading, setLoading] = useState(false);
   const set = (k: keyof typeof empty, v: string) => setF((s) => ({ ...s, [k]: v }));
   const personal = [f.nome, f.email, onlyDigits(f.cpf), onlyDigits(f.telefone)];

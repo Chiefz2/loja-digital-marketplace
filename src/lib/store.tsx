@@ -13,7 +13,7 @@ export type Usuario = {
   bairro: string;
   cidade: string;
   uf: string;
-  foto?: string;
+  foto?: string | undefined;
 };
 export type Cartao = { id: string; bandeira: string; final: string; titular: string; mes: string; ano: string; apelido: string };
 export type ItemCarrinho = { produtoId: string; quantidade: number };
@@ -27,7 +27,7 @@ export type Pedido = {
   frete: number;
   total: number;
   pagamento: "cartao" | "pix" | "boleto";
-  cartaoFinal?: string;
+  cartaoFinal?: string | undefined;
   status: StatusPedido;
   entregueEm?: string;
   endereco: string;
@@ -183,7 +183,7 @@ function useStoreValue() {
       addCartao: (c: Omit<Cartao, "id">) => patch((s) => ({ cartoes: [...s.cartoes, { ...c, id: crypto.randomUUID() }] })),
       updateCartao: (id: string, c: Partial<Cartao>) => patch((s) => ({ cartoes: s.cartoes.map((x) => (x.id === id ? { ...x, ...c } : x)) })),
       removeCartao: (id: string) => patch((s) => ({ cartoes: s.cartoes.filter((x) => x.id !== id) })),
-      placeOrder: (input: { itens: ItemCarrinho[]; pagamento: Pedido["pagamento"]; cartaoFinal?: string; endereco: string; fromCart: boolean }) => {
+      placeOrder: (input: { itens: ItemCarrinho[]; pagamento: Pedido["pagamento"]; cartaoFinal?: string | undefined; endereco: string; fromCart: boolean }) => {
         const id = String(98420 + Math.floor(Math.random() * 500));
         const itens = input.itens.map((i) => ({ produtoId: i.produtoId, quantidade: i.quantidade, preco: getProduto(i.produtoId)!.preco }));
         const subtotal = itens.reduce((a, i) => a + i.preco * i.quantidade, 0);

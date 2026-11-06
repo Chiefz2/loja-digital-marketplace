@@ -27,7 +27,7 @@ export const Route = createFileRoute("/conta/")({
 function Perfil() {
   const { user, updateUser } = useStore();
   const [f, setF] = useState<Usuario>(user!);
-  const [err, setErr] = useState<Partial<Record<keyof Usuario, string>>>({});
+  const [err, setErr] = useState<Partial<Record<keyof Usuario, string | undefined>>>({});
   const [pwOpen, setPwOpen] = useState(false);
   useEffect(() => { if (user) setF(user); }, [user]);
   const set = (k: keyof Usuario, v: string) => setF((s) => ({ ...s, [k]: v }));
