@@ -11,7 +11,7 @@ import { getLoja, getProduto } from "@/lib/data";
 import { brl, dateBR, dateTimeBR } from "@/lib/format";
 import { statusPedidoLabel, useStore } from "@/lib/store";
 import { canCancelOrder, canRequestRefund, refundDeadline } from "@/lib/validators";
-import { statusTone } from "./conta.pedidos.index";
+import { statusTone } from "@/lib/helpers";
 
 export const Route = createFileRoute("/conta/pedidos/$id")({
   head: () => ({

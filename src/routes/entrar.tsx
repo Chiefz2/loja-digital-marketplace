@@ -30,7 +30,7 @@ function Entrar() {
     e.preventDefault();
     if (!email.includes("@") || senha.length < 8) return setErro("E-mail ou senha inválidos");
     if (email.startsWith("suspenso")) return setErro("Conta suspensa. Entre em contato com o suporte.");
-    login(email === "ana@exemplo.com" ? {} : { email, nome: email.split("@")[0] });
+    login(email === "ana@exemplo.com" ? {} : { email, nome: email.split("@")[0] ?? email });
     toast.success("Bem-vindo de volta!");
     navigate({ to: "/" });
   };

@@ -24,7 +24,7 @@ function Departamentos() {
       <p className="mt-2 text-muted-foreground">Navegue pelas categorias e encontre o produto ideal para o seu dia a dia</p>
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {departamentos.map((d) => {
-          const Icon = icons[d.icon];
+          const Icon = icons[d.icon] ?? Sparkles;
           const subs = subcategorias.filter((s) => s.pai === d.id);
           return (
             <div key={d.id} className="rounded-2xl border bg-card p-6 transition hover:shadow-lift">

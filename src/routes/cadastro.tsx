@@ -22,12 +22,7 @@ export const Route = createFileRoute("/cadastro")({
   component: Cadastro,
 });
 
-export async function fetchCEP(cep: string) {
-  const r = await fetch(`https://viacep.com.br/ws/${onlyDigits(cep)}/json/`);
-  const j = await r.json();
-  if (j.erro) throw new Error("CEP não encontrado");
-  return { logradouro: j.logradouro as string, bairro: j.bairro as string, cidade: j.localidade as string, uf: j.uf as string };
-}
+import { fetchCEP } from "@/lib/helpers";
 
 const empty = { nome: "", cpf: "", telefone: "", cep: "", logradouro: "", numero: "", complemento: "", bairro: "", cidade: "", uf: "", email: "", senha: "", confirmar: "" };
 
@@ -37,7 +32,7 @@ function Cadastro() {
   const [f, setF] = useState(empty);
   const [foto, setFoto] = useState<string>();
   const [termos, setTermos] = useState(false);
-  const [err, setErr] = useState<Partial<Record<keyof typeof empty | "termos" | "foto", string>>>({});
+  const [err, setErr] = useState<Partial<Record<keyof typeof empty | "termos" | "foto", string | undefined>>>({});
   const [loading, setLoading] = useState(false);
   const set = (k: keyof typeof empty, v: string) => setF((s) => ({ ...s, [k]: v }));
   const personal = [f.nome, f.email, onlyDigits(f.cpf), onlyDigits(f.telefone)];

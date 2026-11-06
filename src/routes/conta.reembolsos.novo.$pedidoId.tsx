@@ -25,7 +25,7 @@ function Novo() {
   const { pedidos, requestRefund } = useStore();
   const navigate = useNavigate();
   const p = pedidos.find((x) => x.id === pedidoId);
-  const [motivo, setMotivo] = useState(motivosReembolso[0]);
+  const [motivo, setMotivo] = useState<string>(motivosReembolso[0]!);
   const [desc, setDesc] = useState("");
   const [err, setErr] = useState("");
   if (!p) return <p>Pedido não encontrado.</p>;

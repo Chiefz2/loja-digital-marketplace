@@ -3,7 +3,7 @@ import { AccountLayout } from "@/components/shop/AccountLayout";
 import { Pill } from "@/components/shop/ProductCard";
 import { brl, dateBR } from "@/lib/format";
 import { useStore } from "@/lib/store";
-import { reembolsoLabel } from "./conta.reembolsos.$id";
+import { reembolsoLabel } from "@/lib/helpers";
 
 export const Route = createFileRoute("/conta/reembolsos/")({
   head: () => ({

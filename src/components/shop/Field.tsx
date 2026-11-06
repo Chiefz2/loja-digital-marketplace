@@ -1,7 +1,7 @@
 import { Lock } from "lucide-react";
 import type { InputHTMLAttributes } from "react";
 
-export function Field({ label, error, locked, className, ...props }: InputHTMLAttributes<HTMLInputElement> & { label: string; error?: string; locked?: boolean }) {
+export function Field({ label, error, locked, className, ...props }: InputHTMLAttributes<HTMLInputElement> & { label: string; error?: string | undefined; locked?: boolean | undefined }) {
   return (
     <label className={`block text-sm ${className ?? ""}`}>
       <span className="mb-1.5 flex items-center gap-1 font-semibold">

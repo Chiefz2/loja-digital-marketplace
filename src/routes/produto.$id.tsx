@@ -43,7 +43,7 @@ function Detalhe() {
   const n = parcelas(p.preco);
   const reviews = avaliacoes.filter((a) => a.produtoId === p.id);
   const recomenda = reviews.length ? Math.round((reviews.filter((r) => r.nota >= 4).length / reviews.length) * 100) : 98;
-  const [dep, sub] = p.categorias;
+  const [dep = "", sub = ""] = p.categorias;
 
   const requireLogin = () => {
     if (!user) {

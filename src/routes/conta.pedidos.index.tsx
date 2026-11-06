@@ -20,8 +20,7 @@ export const Route = createFileRoute("/conta/pedidos/")({
   component: () => <AccountLayout><Pedidos /></AccountLayout>,
 });
 
-export const statusTone = (s: StatusPedido) =>
-  s === "entregue" ? "success" : s === "cancelado" ? "danger" : s === "em_preparacao" || s === "aguardando_pagamento" ? "warning" : "dark";
+import { statusTone } from "@/lib/helpers";
 
 function Pedidos() {
   const { pedidos } = useStore();

@@ -28,14 +28,14 @@ function Cartoes() {
   const [val, setVal] = useState("");
   const [cvv, setCvv] = useState("");
   const [apelido, setApelido] = useState("");
-  const [err, setErr] = useState<Record<string, string>>({});
+  const [err, setErr] = useState<Partial<Record<"num" | "nome" | "val" | "cvv", string>>>({});
   const [edit, setEdit] = useState<string | null>(null);
   const digits = onlyDigits(num);
   const luhnOk = digits.length >= 13 && isValidLuhn(digits);
 
   const save = (e: React.FormEvent) => {
     e.preventDefault();
-    const er: Record<string, string> = {};
+    const er: Partial<Record<"num" | "nome" | "val" | "cvv", string>> = {};
     if (!isValidLuhn(digits)) er.num = "Número de cartão inválido pelo algoritmo de Luhn";
     if (nome.trim().length < 3) er.nome = "Informe o nome gravado no cartão";
     const m = val.match(/^(\d{2})\/(\d{2})$/);
@@ -47,7 +47,7 @@ function Cartoes() {
     if (!/^\d{3,4}$/.test(cvv)) er.cvv = "CVV deve ter 3 ou 4 dígitos";
     setErr(er);
     if (Object.keys(er).length) return;
-    addCartao({ bandeira: cardBrand(digits), final: digits.slice(-4), titular: nome.toUpperCase(), mes: m![1], ano: m![2], apelido: apelido || "Meu cartão" });
+    addCartao({ bandeira: cardBrand(digits), final: digits.slice(-4), titular: nome.toUpperCase(), mes: m![1]!, ano: m![2]!, apelido: apelido || "Meu cartão" });
     setNum(""); setNome(""); setVal(""); setCvv(""); setApelido("");
     toast.success("Cartão salvo");
   };
@@ -109,7 +109,7 @@ function EditCard({ c, onDone }: { c: Cartao; onDone: (d?: Partial<Cartao>) => v
       <Field label="Apelido" value={apelido} onChange={(e) => setApelido(e.target.value)} />
       <Field label="Validade" value={val} onChange={(e) => setVal(onlyDigits(e.target.value).slice(0, 4).replace(/(\d{2})(\d)/, "$1/$2"))} />
       <div className="flex gap-2">
-        <Button size="sm" onClick={() => { const [mes, ano] = val.split("/"); if (!ano) return toast.error("Validade inválida"); onDone({ apelido, mes, ano }); }}>Salvar</Button>
+        <Button size="sm" onClick={() => { const [mes = "", ano] = val.split("/"); if (!ano) { toast.error("Validade inválida"); return; } onDone({ apelido, mes, ano }); }}>Salvar</Button>
         <Button size="sm" variant="outline" onClick={() => onDone()}>Cancelar</Button>
       </div>
     </div>

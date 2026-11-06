@@ -6,13 +6,7 @@ import { AccountLayout } from "@/components/shop/AccountLayout";
 import { brl, dateTimeBR } from "@/lib/format";
 import { useStore, type StatusReembolso } from "@/lib/store";
 
-export const reembolsoLabel: Record<StatusReembolso, string> = {
-  solicitado: "Solicitado",
-  em_analise: "Em análise",
-  aguardando_recebimento: "Aguardando recebimento",
-  reembolsado: "Reembolsado",
-  recusado: "Recusado",
-};
+import { reembolsoLabel } from "@/lib/helpers";
 
 export const Route = createFileRoute("/conta/reembolsos/$id")({
   head: () => ({

@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { AccountLayout } from "@/components/shop/AccountLayout";
 import { Field } from "@/components/shop/Field";
 import { PasswordChecklist } from "@/components/shop/PasswordChecklist";
-import { fetchCEP } from "./cadastro";
+import { fetchCEP } from "@/lib/helpers";
 import { maskCEP, maskPhone, onlyDigits } from "@/lib/format";
 import { useStore, type Usuario } from "@/lib/store";
 import { isStrongPassword } from "@/lib/validators";
@@ -27,7 +27,7 @@ export const Route = createFileRoute("/conta/")({
 function Perfil() {
   const { user, updateUser } = useStore();
   const [f, setF] = useState<Usuario>(user!);
-  const [err, setErr] = useState<Partial<Record<keyof Usuario, string>>>({});
+  const [err, setErr] = useState<Partial<Record<keyof Usuario, string | undefined>>>({});
   const [pwOpen, setPwOpen] = useState(false);
   useEffect(() => { if (user) setF(user); }, [user]);
   const set = (k: keyof Usuario, v: string) => setF((s) => ({ ...s, [k]: v }));
@@ -58,7 +58,7 @@ function Perfil() {
             <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" onChange={(e) => {
               const file = e.target.files?.[0];
               if (!file) return;
-              if (file.size > 5 * 1024 * 1024) return toast.error("Imagem acima de 5MB");
+              if (file.size > 5 * 1024 * 1024) { toast.error("Imagem acima de 5MB"); return; }
               set("foto", URL.createObjectURL(file));
             }} />
           </label>
