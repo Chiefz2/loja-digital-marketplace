@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { AccountLayout } from "@/components/shop/AccountLayout";
 import { Field } from "@/components/shop/Field";
 import { PasswordChecklist } from "@/components/shop/PasswordChecklist";
-import { fetchCEP } from "./cadastro";
+import { fetchCEP } from "@/lib/helpers";
 import { maskCEP, maskPhone, onlyDigits } from "@/lib/format";
 import { useStore, type Usuario } from "@/lib/store";
 import { isStrongPassword } from "@/lib/validators";

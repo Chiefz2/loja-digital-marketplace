@@ -22,12 +22,7 @@ export const Route = createFileRoute("/cadastro")({
   component: Cadastro,
 });
 
-export async function fetchCEP(cep: string) {
-  const r = await fetch(`https://viacep.com.br/ws/${onlyDigits(cep)}/json/`);
-  const j = await r.json();
-  if (j.erro) throw new Error("CEP não encontrado");
-  return { logradouro: j.logradouro as string, bairro: j.bairro as string, cidade: j.localidade as string, uf: j.uf as string };
-}
+import { fetchCEP } from "@/lib/helpers";
 
 const empty = { nome: "", cpf: "", telefone: "", cep: "", logradouro: "", numero: "", complemento: "", bairro: "", cidade: "", uf: "", email: "", senha: "", confirmar: "" };
 
