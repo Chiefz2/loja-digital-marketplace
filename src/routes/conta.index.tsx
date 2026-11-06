@@ -58,7 +58,7 @@ function Perfil() {
             <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" onChange={(e) => {
               const file = e.target.files?.[0];
               if (!file) return;
-              if (file.size > 5 * 1024 * 1024) return toast.error("Imagem acima de 5MB");
+              if (file.size > 5 * 1024 * 1024) { toast.error("Imagem acima de 5MB"); return; }
               set("foto", URL.createObjectURL(file));
             }} />
           </label>
