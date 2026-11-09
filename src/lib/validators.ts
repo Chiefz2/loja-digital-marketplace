@@ -77,3 +77,36 @@ export function canRequestRefund(deliveredAt: string | undefined, now = new Date
 export function canCancelOrder(status: string) {
   return status === "aguardando_pagamento" || status === "pago" || status === "em_preparacao";
 }
+
+/** CNPJ with check digits */
+export function isValidCNPJ(cnpj: string): boolean {
+  const d = onlyDigits(cnpj);
+  if (d.length !== 14 || /^(\d)\1{13}$/.test(d)) return false;
+  const calc = (len: number) => {
+    const w = len === 12 ? [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2] : [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+    const s = w.reduce((a, x, i) => a + x * Number(d[i]), 0);
+    const r = s % 11;
+    return r < 2 ? 0 : 11 - r;
+  };
+  return calc(12) === Number(d[12]) && calc(13) === Number(d[13]);
+}
+
+/** RF52 — margem de lucro */
+export function margem(preco: number, custo: number) {
+  const lucro = preco - custo;
+  return { lucro, pct: preco > 0 ? (lucro / preco) * 100 : 0, prejuizo: custo > preco };
+}
+
+/** RF35 — status automático pelo estoque */
+export const statusEstoque = (qtd: number) => (qtd <= 0 ? "esgotado" : "ativo");
+
+/** RN27 — anexo do chat: WebP até 80 KB */
+export const CHAT_MAX_BYTES = 80 * 1024;
+export function chatAnexoErro(type: string, size: number) {
+  if (type !== "image/webp") return "Envie apenas imagens no formato WebP.";
+  if (size > CHAT_MAX_BYTES) return "A imagem deve ter no máximo 80 KB.";
+  return null;
+}
+
+/** RF08.1 — exclusão segura de categoria */
+export const podeExcluirCategoria = (qtdProdutos: number, qtdSub: number) => qtdProdutos === 0 && qtdSub === 0;
