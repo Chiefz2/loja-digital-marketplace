@@ -218,16 +218,12 @@ function usePainelValue() {
         })),
       marcarLida: (convId: string, quem: "cliente" | "loja") =>
         patch((s) => ({ conversas: s.conversas.map((c) => (c.id === convId ? { ...c, ...(quem === "loja" ? { naoLidasLoja: 0 } : { naoLidasCliente: 0 }) } : c)) })),
-      abrirConversa: (pedidoId: string, produtoId: string, cliente: string, loja: string) => {
-        let id = "";
-        patch((s) => {
-          const ex = s.conversas.find((c) => c.pedidoId === pedidoId);
-          if (ex) { id = ex.id; return {}; }
-          id = `cv-${uid()}`;
-          return { conversas: [{ id, cliente, loja, pedidoId, produtoId, naoLidasLoja: 0, naoLidasCliente: 0, mensagens: [] }, ...s.conversas] };
-        });
-        return () => id;
-      },
+      abrirConversa: (pedidoId: string, produtoId: string, cliente: string, loja: string) =>
+        patch((s) =>
+          s.conversas.some((c) => c.pedidoId === pedidoId)
+            ? {}
+            : { conversas: [{ id: `cv-${pedidoId}`, cliente, loja, pedidoId, produtoId, naoLidasLoja: 0, naoLidasCliente: 0, mensagens: [] }, ...s.conversas] },
+        ),
       setUsuarioStatus: (id: string, status: Usuario["status"]) => patch((s) => ({ usuarios: s.usuarios.map((u) => (u.id === id ? { ...u, status } : u)) })),
       editarUsuario: (id: string, u: Partial<Usuario>) => patch((s) => ({ usuarios: s.usuarios.map((x) => (x.id === id ? { ...x, ...u } : x)) })),
       salvarCategoria: (c: { id?: string; nome: string; pai?: string | undefined; descricao: string }) =>
