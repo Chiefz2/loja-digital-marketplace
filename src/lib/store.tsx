@@ -204,6 +204,8 @@ function useStoreValue() {
         patch((s) => ({ pedidos: [pedido, ...s.pedidos], cart: input.fromCart ? [] : s.cart }));
         return id;
       },
+      setOrderStatus: (id: string, status: StatusPedido) =>
+        patch((s) => ({ pedidos: s.pedidos.map((p) => (p.id === id ? { ...p, status, ...(status === "entregue" ? { entregueEm: new Date().toISOString() } : {}) } : p)) })),
       cancelOrder: (id: string) => patch((s) => ({ pedidos: s.pedidos.map((p) => (p.id === id ? { ...p, status: "cancelado" } : p)) })),
       addReview: (pedidoId: string, a: Omit<Avaliacao, "id" | "data">) =>
         patch((s) => ({

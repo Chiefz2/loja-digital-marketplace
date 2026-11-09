@@ -26,3 +26,11 @@ export function maskCEP(v: string) {
 export function maskCard(v: string) {
   return onlyDigits(v).slice(0, 19).replace(/(\d{4})(?=\d)/g, "$1 ");
 }
+export function maskCNPJ(v: string) {
+  return onlyDigits(v)
+    .slice(0, 14)
+    .replace(/(\d{2})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d)/, "$1/$2")
+    .replace(/(\d{4})(\d{1,2})$/, "$1-$2");
+}
