@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { usePainel } from "@/lib/painel";
 import { Check, Download, MessageCircle, Plus, Star } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -31,6 +32,8 @@ function Detalhe() {
   const { id } = Route.useParams();
   const { pedidos, cancelOrder, user, addReview, reembolsos } = useStore();
   const p = pedidos.find((x) => x.id === id);
+  const { abrirConversa } = usePainel();
+  const navigate = useNavigate();
   const [avaliar, setAvaliar] = useState<string | null>(null);
   const [confirm, setConfirm] = useState(false);
   if (!p) return <p>Pedido não encontrado.</p>;
@@ -110,7 +113,7 @@ function Detalhe() {
           </div>
           <div><div className="text-xs text-muted-foreground">Emissão</div>{dateTimeBR(p.nfe.emissao)}</div>
           <Button className="w-full" onClick={() => toast("Download da nota fiscal iniciado (demonstração)")}><Download /> Baixar PDF da Nota Fiscal</Button>
-          <button onClick={() => toast("O chat com a loja chega na próxima etapa")} className="flex items-center gap-1.5 text-sm font-semibold text-brand"><MessageCircle className="size-4" /> Abrir Chamado / Chat com a Loja</button>
+          <button onClick={() => { const pid = p.itens[0]!.produtoId; abrirConversa(p.id, pid, user?.nome ?? "Cliente", getLoja(getProduto(pid)?.lojaId ?? "")?.nome ?? "Loja"); navigate({ to: "/conta/mensagens", search: { pedido: p.id } }); }} className="flex items-center gap-1.5 text-sm font-semibold text-brand"><MessageCircle className="size-4" /> Abrir Chamado / Chat com a Loja</button>
         </aside>
       </div>
 

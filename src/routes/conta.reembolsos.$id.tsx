@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { AccountLayout } from "@/components/shop/AccountLayout";
 import { brl, dateTimeBR } from "@/lib/format";
@@ -67,7 +66,7 @@ function Acompanhar() {
         </ol>
       )}
       <div className="rounded-2xl border bg-card p-5 text-sm"><span className="font-semibold">Motivo:</span> {r.motivo}<p className="mt-1 text-muted-foreground">{r.descricao}</p></div>
-      <Button variant="outline" onClick={() => toast("O chat com a loja chega na próxima etapa")}>Falar com Suporte da Loja</Button>
+      <Button variant="outline" asChild><Link to="/conta/mensagens" search={{ pedido: r.pedidoId }}>Falar com Suporte da Loja</Link></Button>
     </div>
   );
 }

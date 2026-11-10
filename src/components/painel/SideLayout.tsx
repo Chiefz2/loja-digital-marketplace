@@ -60,7 +60,7 @@ export function SideLayout({ perfil, children }: { perfil: Perfil; children: Rea
           {m.items.map((i) => (
             <Link
               key={i.to}
-              to={i.to}
+              to={i.to as never}
               activeOptions={{ exact: !!i.exact }}
               className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-muted-foreground transition hover:bg-accent hover:text-foreground data-[status=active]:bg-primary data-[status=active]:text-primary-foreground"
             >

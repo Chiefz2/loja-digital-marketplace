@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { StoreProvider } from "@/lib/store";
+import { PainelProvider } from "@/lib/painel";
 import { Header, Footer } from "@/components/shop/Header";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -105,7 +106,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <head>
         <HeadContent />
       </head>
@@ -123,6 +124,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <StoreProvider>
+      <PainelProvider>
         <div className="flex min-h-screen flex-col">
           <Header />
           <main className="flex-1">
@@ -131,6 +133,7 @@ function RootComponent() {
           <Footer />
         </div>
         <Toaster position="top-center" />
+      </PainelProvider>
       </StoreProvider>
     </QueryClientProvider>
   );
