@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "@tanstack/react-router";
-import { CreditCard, LogOut, Package, RotateCcw, User } from "lucide-react";
+import { CreditCard, LogOut, MessageCircle, Package, RotateCcw, User } from "lucide-react";
 import { useEffect, type ReactNode } from "react";
 import { useStore } from "@/lib/store";
 
@@ -8,6 +8,7 @@ const items = [
   { to: "/conta/cartoes", label: "Meus Cartões", icon: CreditCard },
   { to: "/conta/pedidos", label: "Histórico de Pedidos", icon: Package },
   { to: "/conta/reembolsos", label: "Solicitações de Reembolso", icon: RotateCcw },
+  { to: "/conta/mensagens", label: "Mensagens", icon: MessageCircle },
 ] as const;
 
 export function useRequireUser() {
