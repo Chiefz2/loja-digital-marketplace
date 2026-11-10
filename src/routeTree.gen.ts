@@ -20,12 +20,16 @@ import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
 import { Route as ContaIndexRouteImport } from './routes/conta.index'
 import { Route as ContaCartoesRouteImport } from './routes/conta.cartoes'
 import { Route as LojaIdRouteImport } from './routes/loja.$id'
+import { Route as PainelIndexRouteImport } from './routes/painel.index'
+import { Route as PainelEstoqueRouteImport } from './routes/painel.estoque'
 import { Route as PedidoConfirmadoIdRouteImport } from './routes/pedido-confirmado.$id'
 import { Route as ProdutoIdRouteImport } from './routes/produto.$id'
 import { Route as ContaPedidosIndexRouteImport } from './routes/conta.pedidos.index'
 import { Route as ContaPedidosIdRouteImport } from './routes/conta.pedidos.$id'
 import { Route as ContaReembolsosIndexRouteImport } from './routes/conta.reembolsos.index'
 import { Route as ContaReembolsosIdRouteImport } from './routes/conta.reembolsos.$id'
+import { Route as PainelProdutoIdRouteImport } from './routes/painel.produto.$id'
+import { Route as PainelProdutoNovoRouteImport } from './routes/painel.produto.novo'
 import { Route as ContaReembolsosNovoPedidoIdRouteImport } from './routes/conta.reembolsos.novo.$pedidoId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -83,6 +87,16 @@ const LojaIdRoute = LojaIdRouteImport.update({
   path: '/loja/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PainelIndexRoute = PainelIndexRouteImport.update({
+  id: '/painel/',
+  path: '/painel/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PainelEstoqueRoute = PainelEstoqueRouteImport.update({
+  id: '/painel/estoque',
+  path: '/painel/estoque',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PedidoConfirmadoIdRoute = PedidoConfirmadoIdRouteImport.update({
   id: '/pedido-confirmado/$id',
   path: '/pedido-confirmado/$id',
@@ -113,6 +127,16 @@ const ContaReembolsosIdRoute = ContaReembolsosIdRouteImport.update({
   path: '/conta/reembolsos/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PainelProdutoIdRoute = PainelProdutoIdRouteImport.update({
+  id: '/painel/produto/$id',
+  path: '/painel/produto/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PainelProdutoNovoRoute = PainelProdutoNovoRouteImport.update({
+  id: '/painel/produto/novo',
+  path: '/painel/produto/novo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContaReembolsosNovoPedidoIdRoute =
   ContaReembolsosNovoPedidoIdRouteImport.update({
     id: '/conta/reembolsos/novo/$pedidoId',
@@ -131,11 +155,15 @@ export interface FileRoutesByFullPath {
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/conta/cartoes': typeof ContaCartoesRoute
   '/loja/$id': typeof LojaIdRoute
+  '/painel/estoque': typeof PainelEstoqueRoute
   '/pedido-confirmado/$id': typeof PedidoConfirmadoIdRoute
   '/produto/$id': typeof ProdutoIdRoute
   '/conta/': typeof ContaIndexRoute
+  '/painel/': typeof PainelIndexRoute
   '/conta/pedidos/$id': typeof ContaPedidosIdRoute
   '/conta/reembolsos/$id': typeof ContaReembolsosIdRoute
+  '/painel/produto/$id': typeof PainelProdutoIdRoute
+  '/painel/produto/novo': typeof PainelProdutoNovoRoute
   '/conta/pedidos/': typeof ContaPedidosIndexRoute
   '/conta/reembolsos/': typeof ContaReembolsosIndexRoute
   '/conta/reembolsos/novo/$pedidoId': typeof ContaReembolsosNovoPedidoIdRoute
@@ -151,11 +179,15 @@ export interface FileRoutesByTo {
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/conta/cartoes': typeof ContaCartoesRoute
   '/loja/$id': typeof LojaIdRoute
+  '/painel/estoque': typeof PainelEstoqueRoute
   '/pedido-confirmado/$id': typeof PedidoConfirmadoIdRoute
   '/produto/$id': typeof ProdutoIdRoute
   '/conta': typeof ContaIndexRoute
+  '/painel': typeof PainelIndexRoute
   '/conta/pedidos/$id': typeof ContaPedidosIdRoute
   '/conta/reembolsos/$id': typeof ContaReembolsosIdRoute
+  '/painel/produto/$id': typeof PainelProdutoIdRoute
+  '/painel/produto/novo': typeof PainelProdutoNovoRoute
   '/conta/pedidos': typeof ContaPedidosIndexRoute
   '/conta/reembolsos': typeof ContaReembolsosIndexRoute
   '/conta/reembolsos/novo/$pedidoId': typeof ContaReembolsosNovoPedidoIdRoute
@@ -172,11 +204,15 @@ export interface FileRoutesById {
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/conta/cartoes': typeof ContaCartoesRoute
   '/loja/$id': typeof LojaIdRoute
+  '/painel/estoque': typeof PainelEstoqueRoute
   '/pedido-confirmado/$id': typeof PedidoConfirmadoIdRoute
   '/produto/$id': typeof ProdutoIdRoute
   '/conta/': typeof ContaIndexRoute
+  '/painel/': typeof PainelIndexRoute
   '/conta/pedidos/$id': typeof ContaPedidosIdRoute
   '/conta/reembolsos/$id': typeof ContaReembolsosIdRoute
+  '/painel/produto/$id': typeof PainelProdutoIdRoute
+  '/painel/produto/novo': typeof PainelProdutoNovoRoute
   '/conta/pedidos/': typeof ContaPedidosIndexRoute
   '/conta/reembolsos/': typeof ContaReembolsosIndexRoute
   '/conta/reembolsos/novo/$pedidoId': typeof ContaReembolsosNovoPedidoIdRoute
@@ -194,11 +230,15 @@ export interface FileRouteTypes {
     | '/recuperar-senha'
     | '/conta/cartoes'
     | '/loja/$id'
+    | '/painel/estoque'
     | '/pedido-confirmado/$id'
     | '/produto/$id'
     | '/conta/'
+    | '/painel/'
     | '/conta/pedidos/$id'
     | '/conta/reembolsos/$id'
+    | '/painel/produto/$id'
+    | '/painel/produto/novo'
     | '/conta/pedidos/'
     | '/conta/reembolsos/'
     | '/conta/reembolsos/novo/$pedidoId'
@@ -214,11 +254,15 @@ export interface FileRouteTypes {
     | '/recuperar-senha'
     | '/conta/cartoes'
     | '/loja/$id'
+    | '/painel/estoque'
     | '/pedido-confirmado/$id'
     | '/produto/$id'
     | '/conta'
+    | '/painel'
     | '/conta/pedidos/$id'
     | '/conta/reembolsos/$id'
+    | '/painel/produto/$id'
+    | '/painel/produto/novo'
     | '/conta/pedidos'
     | '/conta/reembolsos'
     | '/conta/reembolsos/novo/$pedidoId'
@@ -234,11 +278,15 @@ export interface FileRouteTypes {
     | '/recuperar-senha'
     | '/conta/cartoes'
     | '/loja/$id'
+    | '/painel/estoque'
     | '/pedido-confirmado/$id'
     | '/produto/$id'
     | '/conta/'
+    | '/painel/'
     | '/conta/pedidos/$id'
     | '/conta/reembolsos/$id'
+    | '/painel/produto/$id'
+    | '/painel/produto/novo'
     | '/conta/pedidos/'
     | '/conta/reembolsos/'
     | '/conta/reembolsos/novo/$pedidoId'
@@ -255,11 +303,15 @@ export interface RootRouteChildren {
   RecuperarSenhaRoute: typeof RecuperarSenhaRoute
   ContaCartoesRoute: typeof ContaCartoesRoute
   LojaIdRoute: typeof LojaIdRoute
+  PainelEstoqueRoute: typeof PainelEstoqueRoute
   PedidoConfirmadoIdRoute: typeof PedidoConfirmadoIdRoute
   ProdutoIdRoute: typeof ProdutoIdRoute
   ContaIndexRoute: typeof ContaIndexRoute
+  PainelIndexRoute: typeof PainelIndexRoute
   ContaPedidosIdRoute: typeof ContaPedidosIdRoute
   ContaReembolsosIdRoute: typeof ContaReembolsosIdRoute
+  PainelProdutoIdRoute: typeof PainelProdutoIdRoute
+  PainelProdutoNovoRoute: typeof PainelProdutoNovoRoute
   ContaPedidosIndexRoute: typeof ContaPedidosIndexRoute
   ContaReembolsosIndexRoute: typeof ContaReembolsosIndexRoute
   ContaReembolsosNovoPedidoIdRoute: typeof ContaReembolsosNovoPedidoIdRoute
@@ -344,6 +396,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LojaIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/painel/': {
+      id: '/painel/'
+      path: '/painel'
+      fullPath: '/painel/'
+      preLoaderRoute: typeof PainelIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/painel/estoque': {
+      id: '/painel/estoque'
+      path: '/painel/estoque'
+      fullPath: '/painel/estoque'
+      preLoaderRoute: typeof PainelEstoqueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pedido-confirmado/$id': {
       id: '/pedido-confirmado/$id'
       path: '/pedido-confirmado/$id'
@@ -386,6 +452,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContaReembolsosIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/painel/produto/$id': {
+      id: '/painel/produto/$id'
+      path: '/painel/produto/$id'
+      fullPath: '/painel/produto/$id'
+      preLoaderRoute: typeof PainelProdutoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/painel/produto/novo': {
+      id: '/painel/produto/novo'
+      path: '/painel/produto/novo'
+      fullPath: '/painel/produto/novo'
+      preLoaderRoute: typeof PainelProdutoNovoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/conta/reembolsos/novo/$pedidoId': {
       id: '/conta/reembolsos/novo/$pedidoId'
       path: '/conta/reembolsos/novo/$pedidoId'
@@ -407,11 +487,15 @@ const rootRouteChildren: RootRouteChildren = {
   RecuperarSenhaRoute: RecuperarSenhaRoute,
   ContaCartoesRoute: ContaCartoesRoute,
   LojaIdRoute: LojaIdRoute,
+  PainelEstoqueRoute: PainelEstoqueRoute,
   PedidoConfirmadoIdRoute: PedidoConfirmadoIdRoute,
   ProdutoIdRoute: ProdutoIdRoute,
   ContaIndexRoute: ContaIndexRoute,
+  PainelIndexRoute: PainelIndexRoute,
   ContaPedidosIdRoute: ContaPedidosIdRoute,
   ContaReembolsosIdRoute: ContaReembolsosIdRoute,
+  PainelProdutoIdRoute: PainelProdutoIdRoute,
+  PainelProdutoNovoRoute: PainelProdutoNovoRoute,
   ContaPedidosIndexRoute: ContaPedidosIndexRoute,
   ContaReembolsosIndexRoute: ContaReembolsosIndexRoute,
   ContaReembolsosNovoPedidoIdRoute: ContaReembolsosNovoPedidoIdRoute,
