@@ -11,12 +11,18 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CadastroRouteImport } from './routes/cadastro'
+import { Route as CadastroEmpresaRouteImport } from './routes/cadastro-empresa'
 import { Route as CarrinhoRouteImport } from './routes/carrinho'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as DepartamentosRouteImport } from './routes/departamentos'
 import { Route as EntrarRouteImport } from './routes/entrar'
 import { Route as ProdutosRouteImport } from './routes/produtos'
 import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminCategoriasRouteImport } from './routes/admin.categorias'
+import { Route as AdminLojasRouteImport } from './routes/admin.lojas'
+import { Route as AdminModeracaoRouteImport } from './routes/admin.moderacao'
+import { Route as AdminUsuariosRouteImport } from './routes/admin.usuarios'
 import { Route as ContaIndexRouteImport } from './routes/conta.index'
 import { Route as ContaCartoesRouteImport } from './routes/conta.cartoes'
 import { Route as ContaMensagensRouteImport } from './routes/conta.mensagens'
@@ -26,6 +32,7 @@ import { Route as PainelEstoqueRouteImport } from './routes/painel.estoque'
 import { Route as PainelMensagensRouteImport } from './routes/painel.mensagens'
 import { Route as PainelNotificacoesRouteImport } from './routes/painel.notificacoes'
 import { Route as PainelPedidosRouteImport } from './routes/painel.pedidos'
+import { Route as PainelPerfilRouteImport } from './routes/painel.perfil'
 import { Route as PedidoConfirmadoIdRouteImport } from './routes/pedido-confirmado.$id'
 import { Route as ProdutoIdRouteImport } from './routes/produto.$id'
 import { Route as ContaPedidosIndexRouteImport } from './routes/conta.pedidos.index'
@@ -44,6 +51,11 @@ const IndexRoute = IndexRouteImport.update({
 const CadastroRoute = CadastroRouteImport.update({
   id: '/cadastro',
   path: '/cadastro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CadastroEmpresaRoute = CadastroEmpresaRouteImport.update({
+  id: '/cadastro-empresa',
+  path: '/cadastro-empresa',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CarrinhoRoute = CarrinhoRouteImport.update({
@@ -74,6 +86,31 @@ const ProdutosRoute = ProdutosRouteImport.update({
 const RecuperarSenhaRoute = RecuperarSenhaRouteImport.update({
   id: '/recuperar-senha',
   path: '/recuperar-senha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCategoriasRoute = AdminCategoriasRouteImport.update({
+  id: '/admin/categorias',
+  path: '/admin/categorias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLojasRoute = AdminLojasRouteImport.update({
+  id: '/admin/lojas',
+  path: '/admin/lojas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminModeracaoRoute = AdminModeracaoRouteImport.update({
+  id: '/admin/moderacao',
+  path: '/admin/moderacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminUsuariosRoute = AdminUsuariosRouteImport.update({
+  id: '/admin/usuarios',
+  path: '/admin/usuarios',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContaIndexRoute = ContaIndexRouteImport.update({
@@ -119,6 +156,11 @@ const PainelNotificacoesRoute = PainelNotificacoesRouteImport.update({
 const PainelPedidosRoute = PainelPedidosRouteImport.update({
   id: '/painel/pedidos',
   path: '/painel/pedidos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PainelPerfilRoute = PainelPerfilRouteImport.update({
+  id: '/painel/perfil',
+  path: '/painel/perfil',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PedidoConfirmadoIdRoute = PedidoConfirmadoIdRouteImport.update({
@@ -171,12 +213,17 @@ const ContaReembolsosNovoPedidoIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cadastro': typeof CadastroRoute
+  '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/carrinho': typeof CarrinhoRoute
   '/checkout': typeof CheckoutRoute
   '/departamentos': typeof DepartamentosRoute
   '/entrar': typeof EntrarRoute
   '/produtos': typeof ProdutosRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/admin/categorias': typeof AdminCategoriasRoute
+  '/admin/lojas': typeof AdminLojasRoute
+  '/admin/moderacao': typeof AdminModeracaoRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
   '/conta/cartoes': typeof ContaCartoesRoute
   '/conta/mensagens': typeof ContaMensagensRoute
   '/loja/$id': typeof LojaIdRoute
@@ -184,8 +231,10 @@ export interface FileRoutesByFullPath {
   '/painel/mensagens': typeof PainelMensagensRoute
   '/painel/notificacoes': typeof PainelNotificacoesRoute
   '/painel/pedidos': typeof PainelPedidosRoute
+  '/painel/perfil': typeof PainelPerfilRoute
   '/pedido-confirmado/$id': typeof PedidoConfirmadoIdRoute
   '/produto/$id': typeof ProdutoIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/conta/': typeof ContaIndexRoute
   '/painel/': typeof PainelIndexRoute
   '/conta/pedidos/$id': typeof ContaPedidosIdRoute
@@ -199,12 +248,17 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cadastro': typeof CadastroRoute
+  '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/carrinho': typeof CarrinhoRoute
   '/checkout': typeof CheckoutRoute
   '/departamentos': typeof DepartamentosRoute
   '/entrar': typeof EntrarRoute
   '/produtos': typeof ProdutosRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/admin/categorias': typeof AdminCategoriasRoute
+  '/admin/lojas': typeof AdminLojasRoute
+  '/admin/moderacao': typeof AdminModeracaoRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
   '/conta/cartoes': typeof ContaCartoesRoute
   '/conta/mensagens': typeof ContaMensagensRoute
   '/loja/$id': typeof LojaIdRoute
@@ -212,8 +266,10 @@ export interface FileRoutesByTo {
   '/painel/mensagens': typeof PainelMensagensRoute
   '/painel/notificacoes': typeof PainelNotificacoesRoute
   '/painel/pedidos': typeof PainelPedidosRoute
+  '/painel/perfil': typeof PainelPerfilRoute
   '/pedido-confirmado/$id': typeof PedidoConfirmadoIdRoute
   '/produto/$id': typeof ProdutoIdRoute
+  '/admin': typeof AdminIndexRoute
   '/conta': typeof ContaIndexRoute
   '/painel': typeof PainelIndexRoute
   '/conta/pedidos/$id': typeof ContaPedidosIdRoute
@@ -228,12 +284,17 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cadastro': typeof CadastroRoute
+  '/cadastro-empresa': typeof CadastroEmpresaRoute
   '/carrinho': typeof CarrinhoRoute
   '/checkout': typeof CheckoutRoute
   '/departamentos': typeof DepartamentosRoute
   '/entrar': typeof EntrarRoute
   '/produtos': typeof ProdutosRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
+  '/admin/categorias': typeof AdminCategoriasRoute
+  '/admin/lojas': typeof AdminLojasRoute
+  '/admin/moderacao': typeof AdminModeracaoRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
   '/conta/cartoes': typeof ContaCartoesRoute
   '/conta/mensagens': typeof ContaMensagensRoute
   '/loja/$id': typeof LojaIdRoute
@@ -241,8 +302,10 @@ export interface FileRoutesById {
   '/painel/mensagens': typeof PainelMensagensRoute
   '/painel/notificacoes': typeof PainelNotificacoesRoute
   '/painel/pedidos': typeof PainelPedidosRoute
+  '/painel/perfil': typeof PainelPerfilRoute
   '/pedido-confirmado/$id': typeof PedidoConfirmadoIdRoute
   '/produto/$id': typeof ProdutoIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/conta/': typeof ContaIndexRoute
   '/painel/': typeof PainelIndexRoute
   '/conta/pedidos/$id': typeof ContaPedidosIdRoute
@@ -258,12 +321,17 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/cadastro'
+    | '/cadastro-empresa'
     | '/carrinho'
     | '/checkout'
     | '/departamentos'
     | '/entrar'
     | '/produtos'
     | '/recuperar-senha'
+    | '/admin/categorias'
+    | '/admin/lojas'
+    | '/admin/moderacao'
+    | '/admin/usuarios'
     | '/conta/cartoes'
     | '/conta/mensagens'
     | '/loja/$id'
@@ -271,8 +339,10 @@ export interface FileRouteTypes {
     | '/painel/mensagens'
     | '/painel/notificacoes'
     | '/painel/pedidos'
+    | '/painel/perfil'
     | '/pedido-confirmado/$id'
     | '/produto/$id'
+    | '/admin/'
     | '/conta/'
     | '/painel/'
     | '/conta/pedidos/$id'
@@ -286,12 +356,17 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/cadastro'
+    | '/cadastro-empresa'
     | '/carrinho'
     | '/checkout'
     | '/departamentos'
     | '/entrar'
     | '/produtos'
     | '/recuperar-senha'
+    | '/admin/categorias'
+    | '/admin/lojas'
+    | '/admin/moderacao'
+    | '/admin/usuarios'
     | '/conta/cartoes'
     | '/conta/mensagens'
     | '/loja/$id'
@@ -299,8 +374,10 @@ export interface FileRouteTypes {
     | '/painel/mensagens'
     | '/painel/notificacoes'
     | '/painel/pedidos'
+    | '/painel/perfil'
     | '/pedido-confirmado/$id'
     | '/produto/$id'
+    | '/admin'
     | '/conta'
     | '/painel'
     | '/conta/pedidos/$id'
@@ -314,12 +391,17 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/cadastro'
+    | '/cadastro-empresa'
     | '/carrinho'
     | '/checkout'
     | '/departamentos'
     | '/entrar'
     | '/produtos'
     | '/recuperar-senha'
+    | '/admin/categorias'
+    | '/admin/lojas'
+    | '/admin/moderacao'
+    | '/admin/usuarios'
     | '/conta/cartoes'
     | '/conta/mensagens'
     | '/loja/$id'
@@ -327,8 +409,10 @@ export interface FileRouteTypes {
     | '/painel/mensagens'
     | '/painel/notificacoes'
     | '/painel/pedidos'
+    | '/painel/perfil'
     | '/pedido-confirmado/$id'
     | '/produto/$id'
+    | '/admin/'
     | '/conta/'
     | '/painel/'
     | '/conta/pedidos/$id'
@@ -343,12 +427,17 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CadastroRoute: typeof CadastroRoute
+  CadastroEmpresaRoute: typeof CadastroEmpresaRoute
   CarrinhoRoute: typeof CarrinhoRoute
   CheckoutRoute: typeof CheckoutRoute
   DepartamentosRoute: typeof DepartamentosRoute
   EntrarRoute: typeof EntrarRoute
   ProdutosRoute: typeof ProdutosRoute
   RecuperarSenhaRoute: typeof RecuperarSenhaRoute
+  AdminCategoriasRoute: typeof AdminCategoriasRoute
+  AdminLojasRoute: typeof AdminLojasRoute
+  AdminModeracaoRoute: typeof AdminModeracaoRoute
+  AdminUsuariosRoute: typeof AdminUsuariosRoute
   ContaCartoesRoute: typeof ContaCartoesRoute
   ContaMensagensRoute: typeof ContaMensagensRoute
   LojaIdRoute: typeof LojaIdRoute
@@ -356,8 +445,10 @@ export interface RootRouteChildren {
   PainelMensagensRoute: typeof PainelMensagensRoute
   PainelNotificacoesRoute: typeof PainelNotificacoesRoute
   PainelPedidosRoute: typeof PainelPedidosRoute
+  PainelPerfilRoute: typeof PainelPerfilRoute
   PedidoConfirmadoIdRoute: typeof PedidoConfirmadoIdRoute
   ProdutoIdRoute: typeof ProdutoIdRoute
+  AdminIndexRoute: typeof AdminIndexRoute
   ContaIndexRoute: typeof ContaIndexRoute
   PainelIndexRoute: typeof PainelIndexRoute
   ContaPedidosIdRoute: typeof ContaPedidosIdRoute
@@ -383,6 +474,13 @@ declare module '@tanstack/react-router' {
       path: '/cadastro'
       fullPath: '/cadastro'
       preLoaderRoute: typeof CadastroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cadastro-empresa': {
+      id: '/cadastro-empresa'
+      path: '/cadastro-empresa'
+      fullPath: '/cadastro-empresa'
+      preLoaderRoute: typeof CadastroEmpresaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/carrinho': {
@@ -425,6 +523,41 @@ declare module '@tanstack/react-router' {
       path: '/recuperar-senha'
       fullPath: '/recuperar-senha'
       preLoaderRoute: typeof RecuperarSenhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/categorias': {
+      id: '/admin/categorias'
+      path: '/admin/categorias'
+      fullPath: '/admin/categorias'
+      preLoaderRoute: typeof AdminCategoriasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/lojas': {
+      id: '/admin/lojas'
+      path: '/admin/lojas'
+      fullPath: '/admin/lojas'
+      preLoaderRoute: typeof AdminLojasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/moderacao': {
+      id: '/admin/moderacao'
+      path: '/admin/moderacao'
+      fullPath: '/admin/moderacao'
+      preLoaderRoute: typeof AdminModeracaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/usuarios': {
+      id: '/admin/usuarios'
+      path: '/admin/usuarios'
+      fullPath: '/admin/usuarios'
+      preLoaderRoute: typeof AdminUsuariosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/conta/': {
@@ -488,6 +621,13 @@ declare module '@tanstack/react-router' {
       path: '/painel/pedidos'
       fullPath: '/painel/pedidos'
       preLoaderRoute: typeof PainelPedidosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/painel/perfil': {
+      id: '/painel/perfil'
+      path: '/painel/perfil'
+      fullPath: '/painel/perfil'
+      preLoaderRoute: typeof PainelPerfilRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pedido-confirmado/$id': {
@@ -559,12 +699,17 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CadastroRoute: CadastroRoute,
+  CadastroEmpresaRoute: CadastroEmpresaRoute,
   CarrinhoRoute: CarrinhoRoute,
   CheckoutRoute: CheckoutRoute,
   DepartamentosRoute: DepartamentosRoute,
   EntrarRoute: EntrarRoute,
   ProdutosRoute: ProdutosRoute,
   RecuperarSenhaRoute: RecuperarSenhaRoute,
+  AdminCategoriasRoute: AdminCategoriasRoute,
+  AdminLojasRoute: AdminLojasRoute,
+  AdminModeracaoRoute: AdminModeracaoRoute,
+  AdminUsuariosRoute: AdminUsuariosRoute,
   ContaCartoesRoute: ContaCartoesRoute,
   ContaMensagensRoute: ContaMensagensRoute,
   LojaIdRoute: LojaIdRoute,
@@ -572,8 +717,10 @@ const rootRouteChildren: RootRouteChildren = {
   PainelMensagensRoute: PainelMensagensRoute,
   PainelNotificacoesRoute: PainelNotificacoesRoute,
   PainelPedidosRoute: PainelPedidosRoute,
+  PainelPerfilRoute: PainelPerfilRoute,
   PedidoConfirmadoIdRoute: PedidoConfirmadoIdRoute,
   ProdutoIdRoute: ProdutoIdRoute,
+  AdminIndexRoute: AdminIndexRoute,
   ContaIndexRoute: ContaIndexRoute,
   PainelIndexRoute: PainelIndexRoute,
   ContaPedidosIdRoute: ContaPedidosIdRoute,

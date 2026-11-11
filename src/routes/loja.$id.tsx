@@ -3,6 +3,7 @@ import { BadgeCheck, Star } from "lucide-react";
 import { useState } from "react";
 import { ProductCard } from "@/components/shop/ProductCard";
 import { getLoja, produtos } from "@/lib/data";
+import { usePainel } from "@/lib/painel";
 
 export const Route = createFileRoute("/loja/$id")({
   loader: ({ params }) => {
@@ -33,7 +34,9 @@ const tabs = [
 
 function Vitrine() {
   const { id } = Route.useParams();
-  const loja = getLoja(id)!;
+  const base = getLoja(id)!;
+  const { empresa } = usePainel();
+  const loja = empresa.id === id ? { ...base, nome: empresa.nomeFantasia, descricao: empresa.descricao } : base;
   const [tab, setTab] = useState<(typeof tabs)[number][0]>("vendidos");
   const itens = produtos
     .filter((p) => p.lojaId === id)
